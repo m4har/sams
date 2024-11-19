@@ -1,0 +1,18 @@
+basePath: /api/v1
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample server for SAMS application.
+  title: SAMS API
+  version: "1.0"
+paths: {}
+produces:
+- application/json
+schemes:
+- http
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
