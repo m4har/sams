@@ -3,6 +3,7 @@ package services
 import (
 	"fmt"
 
+	"github.com/m4har/sams/internal/domain/dto"
 	"github.com/m4har/sams/internal/domain/entity"
 	"github.com/m4har/sams/internal/domain/repository"
 	"github.com/m4har/sams/pkg/utils"
@@ -30,7 +31,7 @@ func (s *AuthService) Register(email, password string) error {
 	return s.userRepo.Create(user)
 }
 
-func (s *AuthService) Login(email, password string) (*entity.User, error) {
+func (s *AuthService) Login(email, password string) (*dto.LoginResponseDTO, error) {
 	user, err := s.userRepo.FindByEmail(email)
 	if err != nil {
 		return nil, err
@@ -40,5 +41,23 @@ func (s *AuthService) Login(email, password string) (*entity.User, error) {
 		return nil, fmt.Errorf("invalid credentials")
 	}
 
-	return user, nil
+	// Generate JWT token
+	token, err := utils.GenerateToken(user.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &dto.LoginResponseDTO{
+		Token: token,
+		User: dto.UserDTO{
+			ID:        user.ID,
+			Email:     user.Email,
+			CreatedAt: user.CreatedAt,
+			UpdatedAt: user.UpdatedAt,
+		},
+	}, nil
+}
+
+func (s *AuthService) GetUserByID(id uint) (*entity.User, error) {
+	return s.userRepo.FindByID(id)
 }

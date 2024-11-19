@@ -51,3 +51,24 @@ func (r *UserRepository) FindByEmail(email string) (*entity.User, error) {
 
 	return user, nil
 }
+
+func (r *UserRepository) FindByID(id uint) (*entity.User, error) {
+	user := &entity.User{}
+	query := `
+        SELECT id, email, password, created_at, updated_at
+        FROM users
+        WHERE id = $1`
+
+	err := r.db.QueryRow(query, id).Scan(
+		&user.ID,
+		&user.Email,
+		&user.Password,
+		&user.CreatedAt,
+		&user.UpdatedAt,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}

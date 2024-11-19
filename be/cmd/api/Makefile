@@ -1,7 +1,7 @@
 # Makefile for Windows
 # ctrl + shift + p -> Type "Convert Indentation to Tabs"
 POSTGRESQL_URL=postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
-MIGRATION_PATH=internal/infrastructure/migrations
+MIGRATION_PATH=../../internal/infrastructure/migrations
 MAIN_PATH=cmd/api/main.go
 PROJECT_ROOT=../../
 
