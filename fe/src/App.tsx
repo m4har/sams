@@ -1,7 +1,18 @@
-import { Button } from "@/components/ui/button";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { LoginPage } from "./features/auth/views";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LoginPage />,
+  },
+]);
 const App = () => {
-  return <Button>Intial Project</Button>;
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 };
 
 export default App;
