@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { LoginPage, RegisterPage } from "./features/auth/views";
+import { MainDashboard, RootDashboard } from "./features/dashboard/views";
 
 const router = createBrowserRouter([
   {
@@ -9,6 +10,16 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+  {
+    path: "/dashboard",
+    element: <RootDashboard />,
+    children: [
+      {
+        index: true,
+        element: <MainDashboard />,
+      },
+    ],
   },
 ]);
 const App = () => {

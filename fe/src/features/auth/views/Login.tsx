@@ -35,6 +35,7 @@ export const LoginPage = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+    navigate("/dashboard");
   }
   return (
     <div className="w-screen h-screen flex items-center justify-center">
