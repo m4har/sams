@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -26,6 +27,7 @@ const formSchema = z.object({
 });
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
@@ -89,7 +91,11 @@ export const LoginPage = () => {
               <Button variant="neutral" type="submit">
                 Login
               </Button>
-              <Button variant="reverse" type="button">
+              <Button
+                variant="reverse"
+                type="button"
+                onClick={() => navigate("/register")}
+              >
                 Register
               </Button>
             </CardFooter>
